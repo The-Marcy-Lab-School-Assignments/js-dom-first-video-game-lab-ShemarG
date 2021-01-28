@@ -1,3 +1,23 @@
+.header-title {
+  text-align: center;
+  font-family: 'VT323', monospace;
+  margin: 20px 0 20px 0;
+  font-size: 4em;
+}
+
+.game-hud {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  color: limegreen;
+  font-family: courier;
+  width: 100%;
+  font-family: 'VT323', monospace;
+  font-variant: small-caps;
+  font-size: 1.5em;
+}
+
 #square {
   background-color: red;
   height: 50px;
@@ -7,15 +27,36 @@
 
 #game {
   background-color: #111;
-  height: 350px;
+  height: 500px;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
   text-align: center;
-  width: 350px;
+  width: 500px;
 }
 
 button {
-  margin: auto;
-  display: block;
+  width: 10em;
+  height: 3em;
+  border-radius: 5px;
+}
+
+.button-menu {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 20px 0;
+}
+
+.monologue {
+  display: flex;
+  justify-content: center;
+}
+
+.monologue p {
+  margin: 0;
+  font-size: 1.5em;
+  width: 65%;
+  text-align: center;
+  font-family: 'VT323', monospace;
+  font-variant: small-caps;
 }
