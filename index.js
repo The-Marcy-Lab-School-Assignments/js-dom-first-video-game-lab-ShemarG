@@ -23,6 +23,7 @@ const playSound = (sound) => {
 };
 
 const controls = (e) => {
+  e.preventDefault();
   if (e.type === 'keydown') {
     e.key in keyMap ? keyMap[e.key] = true : null;
   } else {
