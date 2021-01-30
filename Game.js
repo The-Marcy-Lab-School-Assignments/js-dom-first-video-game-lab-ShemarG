@@ -145,10 +145,10 @@ class Game {
   constructor(player, map) {
     this.levels = {
       1: { par: 5, time: 60, speed: 1.5 },
-      2: { par: 10, time: 50, speed: 2.5 },
-      3: { par: 15, time: 30, speed: 3.5 },
-      4: { par: 20, time: 20, speed: 4.0 },
-      5: { par: 30, time: 15, speed: 7.5 }, // MWAHAHAHAHAHA!!!
+      2: { par: 10, time: 50, speed: 2 },
+      3: { par: 15, time: 30, speed: 2.5 },
+      4: { par: 20, time: 20, speed: 3 },
+      5: { par: 30, time: 15, speed: 3.5 }, // MWAHAHAHAHAHA!!!
     };
     this.player = new Character(player, { x: player.offsetLeft, y: player.offsetTop }, 1, 'red');
     this.map = map;
@@ -188,10 +188,14 @@ class Game {
   // Obliterates the enemy, spawns a new one and increases score. Level up if score is appropriate.
   killEnemy() {
     this.enemy.el.remove();
-    this.enemy = this.addEnemy();
     this.score += 1;
-    if (this.score === this.goal) this.nextLevel();
+    if (this.score < 30) {
+      this.enemy = this.addEnemy();
+    } else {
+      this.enemy = null;
+    }
     document.dispatchEvent(this.scored);
+    if (this.score === this.goal) this.nextLevel();
   }
 
   // Creates an element that becomes the enemy.
@@ -241,7 +245,10 @@ class Game {
 
   // Does all of the reassignemnt specific to each level.
   nextLevel() {
-    if (this.level === 5) this.gameEnd(); document.dispatchEvent(this.scored);
+    if (this.level === 5) {
+      this.gameEnd();
+      return;
+    }
     this.level += 1;
     document.dispatchEvent(this.levelUp);
     this.player.speed = this.levels[this.level].speed;
@@ -253,6 +260,7 @@ class Game {
   }
 
   gameEnd() {
+    if (this.timer.timeLeft > 0) this.timer.pauseTimer();
     const gameOver = new Event('game-over');
     this.gameOver = true;
     document.dispatchEvent(gameOver);

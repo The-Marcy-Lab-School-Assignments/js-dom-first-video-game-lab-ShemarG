@@ -8,11 +8,20 @@ const attack = document.getElementById('attack');
 const levelUp = document.getElementById('levelUp');
 const startSound = document.getElementById('startSound');
 const lose = document.getElementById('lose');
+const victory = document.getElementById('victory');
 const game = new Game(square, board);
+const scoreboard = () => `Level:${game.level} Score:${game.score}`;
 
 const keyMap = {
   ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false
 };
+
+const gameLoop = setInterval(() => {
+  if (keyMap.ArrowUp) game.move('up');
+  if (keyMap.ArrowDown) game.move('down');
+  if (keyMap.ArrowRight) game.move('right');
+  if (keyMap.ArrowLeft) game.move('left');
+}, 20);
 
 const playSound = (sound) => {
   if (sound.paused) {
@@ -29,10 +38,6 @@ const controls = (e) => {
   } else {
     e.key in keyMap ? keyMap[e.key] = false : null;
   }
-  if (keyMap.ArrowUp) game.move('up');
-  if (keyMap.ArrowDown) game.move('down');
-  if (keyMap.ArrowRight) game.move('right');
-  if (keyMap.ArrowLeft) game.move('left');
 };
 
 const enableControls = () => {
@@ -47,29 +52,33 @@ const disableControls = () => {
 
 const pauseGame = () => {
   game.paused ? enableControls() : disableControls();
+  info.textContent = game.paused ? scoreboard() : 'Paused';
   pause.textContent = pause.textContent === 'Pause' ? 'Resume' : 'Pause';
   game.togglePause();
 };
 
 const updateInfo = () => {
   if (game.score !== 0) playSound(attack);
-  info.textContent = `Level:${game.level} Score:${game.score}`;
+  info.textContent = scoreboard();
 };
 
 const playLevelUpSound = () => {
+  info.textContent = scoreboard();
   playSound(levelUp);
 };
 
 const gameEnd = () => {
   disableControls();
+  keyMap.ArrowUp = false; keyMap.ArrowDown = false; keyMap.ArrowRight = false; keyMap.ArrowLeft = false;
   pause.style.display = 'none';
   start.style.display = 'initial';
-  start.textContent = 'Restart';
+  start.textContent = 'Play Again';
   if (game.score < 30) {
     info.textContent = `You have failed! Score:${game.score}`;
     playSound(lose);
   } else if (game.score === 30) {
-    info.textContent = 'You saved the world!!!';
+    info.textContent = 'You saved the world!';
+    playSound(victory);
   }
 };
 
