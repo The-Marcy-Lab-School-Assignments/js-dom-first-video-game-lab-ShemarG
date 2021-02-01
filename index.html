@@ -4,13 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>My First Video Game</title>
+  <title>BLOCKMAN: Legends</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header>
+    <h1 class="header-title">BLOCKMAN: Legends</h1>
+  </header>
   <div id="game">
+    <div class="game-hud">
+      <span id="info">Welcome</span>
+      <span id="timer">00:00</span>
+    </div>
     <div id="square" style="top: 200px; left: 150px;"></div>
   </div>
-  <script type="text/javascript" src="index.js"></script>
+  <section class="button-menu">
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+  </section>
+  <section class="monologue">
+    <p>In a world where the white squares have taken over, one block's quest to end it all takes him to the seat of their imperial capital. If he can defeat the 30 evil leaders before they can power up and stop him, the world may once again know peace. Play as Blockman, in <i>Blockman: Legends</i> Through 5 intense levels, where his bloodlust increases his speed with each level as he moves in his 8 directions. He cannot escape his quest, he is bound to that black building by fate. His enemies know to not appear within 50 pixels of him in either dimension. The use of time-warping technology has enabled him to freeze time right before he fails and take him back to the beginning, but each time he warps, his enemies appear in different locations. He can also stop time on a whim, then continue his carnage as he chooses. If clicked, Blockman draws on his ROY-G-BIV powers and randomly takes on one of their forms. Blockman warms up on his own in his own dimension at the beginning, only after clicking "Start" does his quest begin.</p>
+  </section>
+  <audio id="attack" src="attack.wav"></audio>
+  <audio id="levelUp" src="levelUp.wav"></audio>
+  <audio id="lose" src="lose.wav"></audio>
+  <audio id="startSound" src="start.wav"></audio>
+  <audio id="victory" src="victory.wav"></audio>
 </body>
+<script type="text/javascript" src="Game.js"></script>
+<script type="text/javascript" src="index.js"></script>
 </html>
